@@ -1,3 +1,5 @@
+import 'package:disenos/src/pages/botones_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ScrollPage extends StatelessWidget {
@@ -8,7 +10,7 @@ class ScrollPage extends StatelessWidget {
         scrollDirection: Axis.vertical,
         children: <Widget>[
           _pagina1(),
-          _pagina2(),
+          _pagina2(context),
         ],
       ),
     );
@@ -58,21 +60,25 @@ class ScrollPage extends StatelessWidget {
     );
   }
 
-  Widget _pagina2() {
+  Widget _pagina2(BuildContext context) {
     return Stack(
       children: <Widget>[
         _colorFondo(),
-        _boton(),
+        _boton(context),
       ],
     );
   }
 
-  Widget _boton() {
+  Widget _boton(BuildContext context) {
     return Center(
       child: RaisedButton(
         shape: StadiumBorder(),
         textColor: Colors.white,
-        onPressed: (){},
+        onPressed: (){
+          Navigator.of(context).push(CupertinoPageRoute(builder: (BuildContext context){
+            return BotonesPage();
+          }));
+        },
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
           child: Text('Bienvenido', style: TextStyle(fontSize: 20.0),),

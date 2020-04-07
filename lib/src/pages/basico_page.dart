@@ -1,3 +1,5 @@
+import 'package:disenos/src/pages/scroll_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BasicoPage extends StatelessWidget {
@@ -11,15 +13,19 @@ class BasicoPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-          _crearImagen(),
-          _crearTitulo(),
-          _acciones(),
-          _crearTexto(),
-          _crearTexto(),
-          _crearTexto(),
-          _crearTexto(),
-          _crearTexto(),
-        ],
+            _crearImagen(),
+            _crearTitulo(),
+            _acciones(),
+            _crearTexto(),
+            _crearTexto(),
+            _crearTexto(),
+            _crearTexto(),
+            _crearTexto(),
+            _pasarPagina(context),
+            SizedBox(
+              height: 20.0,
+            )
+          ],
         ),
       ),
     ));
@@ -62,14 +68,15 @@ class BasicoPage extends StatelessWidget {
 
   Widget _crearImagen() {
     return Container(
-      width: double.infinity,
-      child: Image(
-        image: NetworkImage(
-            'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAIACTm.img?h=0&w=720&m=6&q=60&u=t&o=f&l=f'),
-            fit: BoxFit.cover,
-            height: 300.0,
-      ),
-    );
+        width: double.infinity,
+        child: FadeInImage(
+          fadeInDuration: Duration(milliseconds: 200),
+          image: NetworkImage(
+              'https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAIACTm.img?h=0&w=720&m=6&q=60&u=t&o=f&l=f'),
+          fit: BoxFit.cover,
+          height: 300.0,
+          placeholder: AssetImage('assets/giphy.gif'),
+        ));
   }
 
   Widget _acciones() {
@@ -86,9 +93,18 @@ class BasicoPage extends StatelessWidget {
   Widget _accion(IconData icon, String texto) {
     return Column(
       children: <Widget>[
-        Icon(icon, color: Colors.blue, size: 40.0,), 
-        SizedBox(height: 5.0,),
-        Text(texto, style: TextStyle(fontSize: 15.0, color: Colors.blue),)
+        Icon(
+          icon,
+          color: Colors.blue,
+          size: 40.0,
+        ),
+        SizedBox(
+          height: 5.0,
+        ),
+        Text(
+          texto,
+          style: TextStyle(fontSize: 15.0, color: Colors.blue),
+        )
       ],
     );
   }
@@ -100,6 +116,27 @@ class BasicoPage extends StatelessWidget {
         child: Text(
           'Quis Lorem reprehenderit aute laboris laboris. Aute irure est cupidatat officia sunt nostrud cillum voluptate duis officia magna et laborum nostrud. Consectetur qui in commodo cupidatat irure proident proident minim occaecat fugiat esse voluptate. Nulla exercitation non nostrud quis nisi nostrud ullamco esse enim et dolor amet exercitation ipsum. Commodo ex laborum cupidatat occaecat non exercitation Lorem culpa do id. Aliqua magna cupidatat velit dolor esse cillum culpa ad dolore aliqua labore. Est anim non mollit ex.',
           textAlign: TextAlign.justify,
+        ),
+      ),
+    );
+  }
+
+  Widget _pasarPagina(BuildContext context) {
+    return Center(
+      child: RaisedButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(CupertinoPageRoute(builder: (BuildContext context) {
+            return ScrollPage();
+          }));
+        },
+        shape: StadiumBorder(),
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+        color: Colors.blue,
+        textColor: Colors.white,
+        child: Text(
+          'Siguiente vista',
+          style: TextStyle(fontSize: 18.0),
         ),
       ),
     );
